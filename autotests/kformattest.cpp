@@ -30,7 +30,13 @@
 void KFormatTest::formatByteSize()
 {
     QLocale locale(QLocale::c());
-    locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
+    locale.setNumberOptions(
+#if QT_VERSION > 0x050600
+		    QLocale::DefaultNumberOptions
+#else
+		    0x0
+#endif
+		    ); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
     KFormat format(locale);
 
     QCOMPARE(format.formatByteSize(0), QStringLiteral("0 B"));
@@ -97,7 +103,13 @@ void KFormatTest::formatByteSize()
 void KFormatTest::formatValue()
 {
     QLocale locale(QLocale::c());
-    locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
+    locale.setNumberOptions(
+#if QT_VERSION > 0x050600
+		    QLocale::DefaultNumberOptions
+#else
+		    0x0
+#endif
+		    ); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
     KFormat format(locale);
 
     // Check examples from the documentation

@@ -286,7 +286,9 @@ QString KAboutLicense::text() const
             result = d->_licenseText;
             break;
         }
+#if QT_VERSION >= 0x050800
         Q_FALLTHROUGH();
+#endif
     // fall through
     default:
         result += QCoreApplication::translate(
